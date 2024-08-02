@@ -140,6 +140,11 @@ fn check_response(response: Response) -> Result<Response, Error> {
                 (mime_type.type_(), mime_type.subtype()),
                 (mime::TEXT, mime::EVENT_STREAM)
             )
+            |
+            matches!(
+                (mime_type.type_(), mime_type.subtype().as_str()),
+                (mime::APPLICATION, "x-ndjson")
+            )
         })
         .unwrap_or(false)
     {
